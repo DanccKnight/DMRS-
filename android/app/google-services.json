@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "115020487545",
+    "firebase_url": "https://dmrs-a54d0.firebaseio.com",
+    "project_id": "dmrs-a54d0",
+    "storage_bucket": "dmrs-a54d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115020487545:android:80bd058b9d4443c1",
+        "android_client_info": {
+          "package_name": "com.example.dmrs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115020487545-o7c4us63vr9nbmtgb7mts9mjfh7t7r7l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBji3h4fHImHnOssgLEJrNZOVx2XeD_pZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115020487545-o7c4us63vr9nbmtgb7mts9mjfh7t7r7l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

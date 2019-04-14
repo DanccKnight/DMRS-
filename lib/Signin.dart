@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class loginPage extends StatefulWidget {
   @override
@@ -6,7 +7,7 @@ class loginPage extends StatefulWidget {
 }
 
 class _loginPageState extends State<loginPage> {
-  String _regNo, _password;
+  String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -21,16 +22,16 @@ class _loginPageState extends State<loginPage> {
             children: <Widget>[
               TextFormField(
                 validator: (input) {
-                  if (input.isEmpty) return "Enter your registration number";
+                  if (input.isEmpty) return "Enter your email";
                 },
-                onSaved: (input) => _regNo = input,
-                decoration: InputDecoration(labelText: 'Registration Number'),
+                onSaved: (input) => _email = input,
+                decoration: InputDecoration(labelText: 'Email'),
               ),
               Padding(padding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 0.0)),
               TextFormField(
                 validator: (input) {
                   if (input.length < 7)
-                    return "Too weak(just like your pullout game)";
+                    return "Password length has to be at least 7 characters";
                 },
                 onSaved: (input) => _password = input,
                 decoration: InputDecoration(labelText: 'Password'),
@@ -40,20 +41,26 @@ class _loginPageState extends State<loginPage> {
               RaisedButton(
                 textColor: Colors.white,
                 color: Colors.blue,
-                onPressed: () {},
-                child: new Text("Submit"),
+                onPressed: signIn,
+                child: new Text("Sign in"),
               )
             ],
           )),
     );
   }
 
-  void signIn() {
+  Future<void> signIn() async {
     final formState = _formKey.currentState;
     if (formState.validate()) {
-      //TODO:login to firebase
-    } else {
-      //TODO:don't login to firebase
+      formState.save();
+      try{
+        FirebaseUser user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _password);
+        Navigator.of(context).pushNamed('/Home');
+      }catch(e){
+        print(e.message);
+      }
+
     }
   }
 }
