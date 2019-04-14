@@ -30,8 +30,8 @@ class _loginPageState extends State<loginPage> {
               Padding(padding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 0.0)),
               TextFormField(
                 validator: (input) {
-                  if (input.length < 7)
-                    return "Password length has to be at least 7 characters";
+                  if (input.length < 5)
+                    return "Password length has to be at least 5 characters";
                 },
                 onSaved: (input) => _password = input,
                 decoration: InputDecoration(labelText: 'Password'),
