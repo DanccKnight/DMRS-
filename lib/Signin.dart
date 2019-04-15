@@ -13,39 +13,65 @@ class _loginPageState extends State<loginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: new Text("Sign In"),
-      ),
       body: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
+        key: _formKey,
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(18.0, 120.0, 0.0, 0.0),
+              child: new Text(
+                'Hello',
+                style:
+                    new TextStyle(color: Colors.blue,fontWeight: FontWeight.bold, fontSize: 80.0),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(20.5, 187.0, 0.0, 0.0),
+              child: new Text(
+                'There.',
+                style:
+                    new TextStyle(color: Colors.blue,fontWeight: FontWeight.bold, fontSize: 80.0),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 330.0, left: 20.0, right: 20.0),
+              child: TextFormField(
                 validator: (input) {
                   if (input.isEmpty) return "Enter your email";
                 },
                 onSaved: (input) => _email = input,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: new TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.grey)),
               ),
-              Padding(padding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 0.0)),
-              TextFormField(
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 401.0, left: 20.0, right: 20.0),
+              child: TextFormField(
                 validator: (input) {
                   if (input.length < 5)
                     return "Password length has to be at least 5 characters";
                 },
-                onSaved: (input) => _password = input,
-                decoration: InputDecoration(labelText: 'Password'),
                 obscureText: true,
+                onSaved: (input) => _password = input,
+                decoration: InputDecoration(
+                    hintText: 'Password',
+                    hintStyle: new TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.grey)),
               ),
-              Padding(padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0)),
-              RaisedButton(
-                textColor: Colors.white,
-                color: Colors.blue,
-                onPressed: signIn,
-                child: new Text("Sign in"),
-              )
-            ],
-          )),
+            ),
+            Container(
+                padding: EdgeInsets.fromLTRB(155.2, 449.0, 0.0, 0.0),
+                child: RaisedButton(
+                    textColor: Colors.white,
+                    color: Colors.blue,
+                    onPressed: signIn,
+                    child: new Text("Sign in"),
+                )),
+          ],
+        ),
+      ),
     );
   }
 
@@ -53,14 +79,13 @@ class _loginPageState extends State<loginPage> {
     final formState = _formKey.currentState;
     if (formState.validate()) {
       formState.save();
-      try{
+      try {
         FirebaseUser user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
         Navigator.of(context).pushNamed('/Home');
-      }catch(e){
+      } catch (e) {
         print(e.message);
       }
-
     }
   }
 }
