@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dmrs/auth.dart';
 
 class loginPage extends StatefulWidget {
   @override
@@ -9,6 +10,14 @@ class loginPage extends StatefulWidget {
 class _loginPageState extends State<loginPage> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Future<bool> _loginUser() async {
+    final api = await Auth.signInWithGoogle();
+    if (api != null)
+      return true;
+    else
+      return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +30,20 @@ class _loginPageState extends State<loginPage> {
               padding: EdgeInsets.fromLTRB(18.0, 120.0, 0.0, 0.0),
               child: new Text(
                 'Hello',
-                style:
-                    new TextStyle(color: Colors.blue,fontWeight: FontWeight.bold, fontSize: 80.0),
+                style: new TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 80.0),
               ),
             ),
             Container(
               padding: EdgeInsets.fromLTRB(20.5, 187.0, 0.0, 0.0),
               child: new Text(
                 'There.',
-                style:
-                    new TextStyle(color: Colors.blue,fontWeight: FontWeight.bold, fontSize: 80.0),
+                style: new TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 80.0),
               ),
             ),
             Container(
@@ -64,10 +77,24 @@ class _loginPageState extends State<loginPage> {
             Container(
                 padding: EdgeInsets.fromLTRB(155.2, 449.0, 0.0, 0.0),
                 child: RaisedButton(
-                    textColor: Colors.white,
-                    color: Colors.blue,
-                    onPressed: signIn,
-                    child: new Text("Sign in"),
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  onPressed: signIn,
+                  child: new Text("Sign in"),
+                )),
+            Container(
+                padding: EdgeInsets.fromLTRB(115.0, 500.0, 0.0, 0.0),
+                child: RaisedButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  onPressed: () async {
+                    bool b = await _loginUser();
+                    b
+                        ? Navigator.of(context).pushNamed('/Home')
+                        : Scaffold.of(context).showSnackBar(
+                            SnackBar(content: new Text('Sign in failed :(')));
+                  },
+                  child: new Text("Sign in with Google instead"),
                 )),
           ],
         ),
