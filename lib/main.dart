@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dmrs/Signin.dart';
-import 'package:dmrs/HomePage.dart';
+import 'package:dmrs/UI/Signin.dart';
+import 'package:dmrs/UI/HomePage.dart';
 
 void main() => runApp(MyApp());
 
