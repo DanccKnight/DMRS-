@@ -1,28 +1,30 @@
 import 'dart:async';
+import 'package:dmrs/Data/Database.dart';
+import 'package:dmrs/Data/Singleton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Auth {
-  static FirebaseAuth _auth = FirebaseAuth.instance;
-  static GoogleSignIn _googleSignIn = GoogleSignIn();
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
-  FirebaseUser firebaseUser;
+  static Future<bool> signInWithGoogle({bool silent = false}) async {
+    final GoogleSignInAccount googleUser = silent
+        ? await _googleSignIn.signInSilently(suppressErrors: true)
+        : await _googleSignIn.signIn();
 
-  Auth(FirebaseUser user) {
-    this.firebaseUser = user;
-  }
-
-  static Future<Auth> signInWithGoogle() async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-        idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
-
-    final FirebaseUser user = await _auth.signInWithCredential(credential);
-
-    return Auth(user);
+    GoogleSignInAuthentication googleAuth;
+    try {
+      googleAuth = await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+          idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+      _auth.signInWithCredential(credential).then((user) {
+        UserData().fireUser = user;
+        updateUserDB();
+      });
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 }

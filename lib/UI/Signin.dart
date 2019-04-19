@@ -11,14 +11,6 @@ class _loginPageState extends State<loginPage> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Future<bool> _loginUser() async {
-    final api = await Auth.signInWithGoogle();
-    if (api != null)
-      return true;
-    else
-      return false;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +67,7 @@ class _loginPageState extends State<loginPage> {
               ),
             ),
             Container(
-                padding: EdgeInsets.fromLTRB(155.2, 449.0, 0.0, 0.0),
+                padding: EdgeInsets.fromLTRB(60.2, 449.0, 0.0, 0.0),
                 child: RaisedButton(
                   textColor: Colors.white,
                   color: Colors.blue,
@@ -83,18 +75,30 @@ class _loginPageState extends State<loginPage> {
                   child: new Text("Sign in"),
                 )),
             Container(
-                padding: EdgeInsets.fromLTRB(115.0, 500.0, 0.0, 0.0),
+                padding: EdgeInsets.fromLTRB(180.0, 449.0, 0.0, 0.0),
                 child: RaisedButton(
                   textColor: Colors.white,
                   color: Colors.blue,
                   onPressed: () async {
-                    bool b = await _loginUser();
-                    b
-                        ? Navigator.of(context).pushNamed('/Home')
-                        : Scaffold.of(context).showSnackBar(
-                            SnackBar(content: new Text('Sign in failed :(')));
+                    Auth.signInWithGoogle().then((_){
+                      Navigator.of(context).pushNamed('/Home');
+                    });
                   },
                   child: new Text("Sign in with Google instead"),
+                )),
+            Container(
+              padding: EdgeInsets.fromLTRB(140.0, 530.0, 0.0, 0.0),
+              child: new Text("Don't have an account?"),
+            ),
+            Container(
+                padding: EdgeInsets.fromLTRB(155.2, 549.0, 0.0, 0.0),
+                child: RaisedButton(
+                  textColor: Colors.white,
+                  color: Colors.blue,
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/SignUp');
+                  },
+                  child: new Text("Sign Up"),
                 )),
           ],
         ),

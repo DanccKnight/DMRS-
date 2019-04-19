@@ -13,7 +13,7 @@ class _HomeState extends State<Home> {
         title: new Text("Home"),
       ),
       body: Center(
-        child: new Text("Hello There"),
+        child: new Text("Hello there"),
       ),
     );
   }

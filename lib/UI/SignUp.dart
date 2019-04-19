@@ -12,6 +12,8 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: new Text("hahaha"),
+    );
   }
 }
