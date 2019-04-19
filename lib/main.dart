@@ -4,7 +4,6 @@ import 'package:dmrs/UI/HomePage.dart';
 import 'package:dmrs/UI/SignUp.dart';
 import 'package:dmrs/UI/About.dart';
 import 'package:dmrs/UI/Menu.dart';
-import 'package:dmrs/Data/MenuTile.dart';
 
 void main() => runApp(MyApp());
 
