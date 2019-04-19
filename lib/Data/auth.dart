@@ -9,12 +9,12 @@ class Auth {
   static final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
   static Future<bool> signInWithGoogle({bool silent = false}) async {
-    final GoogleSignInAccount googleUser = silent
-        ? await _googleSignIn.signInSilently(suppressErrors: true)
-        : await _googleSignIn.signIn();
-
-    GoogleSignInAuthentication googleAuth;
     try {
+      final GoogleSignInAccount googleUser = silent
+          ? await _googleSignIn.signInSilently(suppressErrors: true)
+          : await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleAuth;
+
       googleAuth = await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.getCredential(
           idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);

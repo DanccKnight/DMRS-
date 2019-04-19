@@ -12,6 +12,26 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: new Text("Home"),
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Username'),
+              decoration: BoxDecoration(color: Colors.indigoAccent),
+            ),
+            ListTile(
+              title: Text('Mess Menu'),
+              onTap: () {},
+            ),
+            ListTile(
+                title: Text('About'),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/About');
+                })
+          ],
+        ),
+      ),
       body: Center(
         child: new Text("Hello there"),
       ),

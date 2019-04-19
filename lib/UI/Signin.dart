@@ -11,6 +11,8 @@ class _loginPageState extends State<loginPage> {
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final snackbar = SnackBar(content: new Text("Google Sign In Failed"));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,9 +82,8 @@ class _loginPageState extends State<loginPage> {
                   textColor: Colors.white,
                   color: Colors.blue,
                   onPressed: () async {
-                    Auth.signInWithGoogle().then((_){
-                      Navigator.of(context).pushNamed('/Home');
-                    });
+                    if(Auth.signInWithGoogle() == true)
+                      Navigator.of(context).pushReplacementNamed('/Home');
                   },
                   child: new Text("Sign in with Google instead"),
                 )),
