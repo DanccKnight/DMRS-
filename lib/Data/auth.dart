@@ -20,7 +20,7 @@ class Auth {
           idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
       _auth.signInWithCredential(credential).then((user) {
         UserData().fireUser = user;
-        updateUserDB();
+        updateUserDB();;
       });
     } catch (e) {
       return false;

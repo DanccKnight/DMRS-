@@ -82,7 +82,7 @@ class _loginPageState extends State<loginPage> {
                   textColor: Colors.white,
                   color: Colors.blue,
                   onPressed: () async {
-                    if(Auth.signInWithGoogle() == true)
+                    if(await Auth.signInWithGoogle() == true)
                       Navigator.of(context).pushReplacementNamed('/Home');
                   },
                   child: new Text("Sign in with Google instead"),
