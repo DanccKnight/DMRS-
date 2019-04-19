@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         '/Home': (BuildContext context) => new Home(),
         '/SignUp': (BuildContext context) => new SignupPage(),
         '/About': (BuildContext context) => new AboutPage(),
-        '/Menu': (BuildContext context) => new Menu()
+        '/Menu': (BuildContext context) => new Menu(),
       }
     );
   }

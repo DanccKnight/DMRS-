@@ -41,83 +41,19 @@ class _loginPageState extends State<loginPage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: 330.0, left: 20.0, right: 20.0),
-              child: TextFormField(
-                validator: (input) {
-                  if (input.isEmpty) return "Enter your email";
-                },
-                onSaved: (input) => _email = input,
-                decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: new TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey)),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 401.0, left: 20.0, right: 20.0),
-              child: TextFormField(
-                validator: (input) {
-                  if (input.length < 5)
-                    return "Password length has to be at least 5 characters";
-                },
-                obscureText: true,
-                onSaved: (input) => _password = input,
-                decoration: InputDecoration(
-                    hintText: 'Password',
-                    hintStyle: new TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey)),
-              ),
-            ),
-            Container(
-                padding: EdgeInsets.fromLTRB(60.2, 459.0, 0.0, 0.0),
-                child: RaisedButton(
-                  textColor: Colors.white,
-                  color: Colors.blue,
-                  onPressed: signIn,
-                  child: new Text("Sign in"),
-                )),
-            Container(
                 padding: EdgeInsets.fromLTRB(180.0, 459.0, 0.0, 0.0),
                 child: RaisedButton(
                   textColor: Colors.white,
                   color: Colors.blue,
                   onPressed: () async {
-                    if(await Auth.signInWithGoogle() == true)
+                    if (await Auth.signInWithGoogle() == true)
                       Navigator.of(context).pushReplacementNamed('/Home');
                   },
-                  child: new Text("Sign in with Google instead"),
-                )),
-            Container(
-              padding: EdgeInsets.fromLTRB(140.0, 530.0, 0.0, 0.0),
-              child: new Text("Don't have an account?"),
-            ),
-            Container(
-                padding: EdgeInsets.fromLTRB(155.2, 549.0, 0.0, 0.0),
-                child: RaisedButton(
-                  textColor: Colors.white,
-                  color: Colors.blue,
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/SignUp');
-                  },
-                  child: new Text("Sign Up"),
+                  child: new Text("Sign in with Google"),
                 )),
           ],
         ),
       ),
     );
-  }
-
-  Future<void> signIn() async {
-    final formState = _formKey.currentState;
-    if (formState.validate()) {
-      formState.save();
-      try {
-        FirebaseUser user = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.of(context).pushNamed('/Home');
-      } catch (e) {
-        print(e.message);
-      }
-    }
   }
 }
