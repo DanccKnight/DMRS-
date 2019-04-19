@@ -69,7 +69,7 @@ class _loginPageState extends State<loginPage> {
               ),
             ),
             Container(
-                padding: EdgeInsets.fromLTRB(60.2, 449.0, 0.0, 0.0),
+                padding: EdgeInsets.fromLTRB(60.2, 459.0, 0.0, 0.0),
                 child: RaisedButton(
                   textColor: Colors.white,
                   color: Colors.blue,
@@ -77,7 +77,7 @@ class _loginPageState extends State<loginPage> {
                   child: new Text("Sign in"),
                 )),
             Container(
-                padding: EdgeInsets.fromLTRB(180.0, 449.0, 0.0, 0.0),
+                padding: EdgeInsets.fromLTRB(180.0, 459.0, 0.0, 0.0),
                 child: RaisedButton(
                   textColor: Colors.white,
                   color: Colors.blue,

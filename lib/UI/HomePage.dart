@@ -22,7 +22,9 @@ class _HomeState extends State<Home> {
             ),
             ListTile(
               title: Text('Mess Menu'),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed('/Menu');
+              },
             ),
             ListTile(
                 title: Text('About'),

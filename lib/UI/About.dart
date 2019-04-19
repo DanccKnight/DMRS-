@@ -9,6 +9,9 @@ class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('About')
+      ),
       body: new Container(
           child: Center(
               child: new Text(
