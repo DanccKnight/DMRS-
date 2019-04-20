@@ -9,7 +9,7 @@ class UpdateMenu extends StatefulWidget {
 class _UpdateMenuState extends State<UpdateMenu> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  MessMenu _messMenu = MessMenu(nullObj: true);
+  MessMenu _messMenu = MessMenu(nullObj: true,dateTime: DateTime.now());
 
   @override
   Widget build(BuildContext context) {

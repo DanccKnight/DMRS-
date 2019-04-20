@@ -9,6 +9,7 @@ class MessMenu {
       {this.mid,
       this.lunch,
       this.breakfast,
+      this.dateTime,
       this.dinner,
       this.hitea,
       this.ds,
@@ -22,6 +23,7 @@ class MessMenu {
   }
 
   String breakfast;
+  DateTime dateTime;
   String lunch;
   String hitea;
   String dinner;
@@ -45,6 +47,7 @@ class MessMenu {
     this.hitea = menu.hitea;
     this.lunch = menu.lunch;
     this.ds = menu.ds;
+    this.dateTime = menu.dateTime;
     this.dinner = menu.dinner;
   }
 

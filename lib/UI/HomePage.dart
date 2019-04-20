@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dmrs/Data/Singleton.dart';
+import 'package:dmrs/Data/MessMenu.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -65,17 +67,18 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName: Text(
-                    UserData().fireUser == null ? "" : UserData().fireUser
-                        .displayName),
-                accountEmail: Text(
-                    UserData().fireUser == null ? "" : UserData().fireUser
-                        .email),
+                accountName: Text(UserData().fireUser == null
+                    ? ""
+                    : UserData().fireUser.displayName),
+                accountEmail: Text(UserData().fireUser == null
+                    ? ""
+                    : UserData().fireUser.email),
                 currentAccountPicture: new GestureDetector(
                   child: new CircleAvatar(
                     backgroundImage: new NetworkImage(
-                        UserData().fireUser == null ? "" : user.fireUser
-                            .photoUrl),
+                        UserData().fireUser == null
+                            ? ""
+                            : user.fireUser.photoUrl),
                   ),
                 ),
                 decoration: BoxDecoration(color: Colors.blueAccent),
@@ -95,14 +98,15 @@ class _HomeState extends State<Home> {
         ),
         body: Center(
             child: Column(children: <Widget>[
-              card(_b),
-              card(_l),
-              card(_ht),
-              card(_d),
-            ])),
+          card(_b),
+          card(_l),
+          card(_ht),
+          card(_d),
+        ])),
         floatingActionButton: new FloatingActionButton(
           onPressed: onPressedFAB,
-          child: Icon(Icons.edit,
+          child: Icon(
+            Icons.edit,
             color: Colors.black,
           ),
           backgroundColor: Colors.blueAccent,
@@ -112,8 +116,7 @@ class _HomeState extends State<Home> {
   void onPressedFAB() {
     if (user.user.isEmployee == true) {
       Navigator.of(context).pushNamed('/updateMenu');
-    }
-    else
+    } else
       null;
   }
 
@@ -129,15 +132,15 @@ class _HomeState extends State<Home> {
           content: new RichText(
               text: new TextSpan(
                   text:
-                  'This app has been made using Flutter and Cloud Firestore. Feel free to check out the code at: ',
+                      'This app has been made using Flutter and Cloud Firestore. Feel free to check out the code at: ',
                   children: <TextSpan>[
-                    new TextSpan(
-                        text: 'https://github.com/DanccKnight/DMRS-',
-                        recognizer: _githubTapRecognizer,
-                        style: const TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline)),
-                  ])),
+                new TextSpan(
+                    text: 'https://github.com/DanccKnight/DMRS-',
+                    recognizer: _githubTapRecognizer,
+                    style: const TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline)),
+              ])),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
@@ -152,6 +155,8 @@ class _HomeState extends State<Home> {
     );
   }
 
+  MessMenu messMenu = MessMenu();
+
   void _showMenu(String value) {
     showDialog(
       context: context,
@@ -159,7 +164,13 @@ class _HomeState extends State<Home> {
         // return object of type Dialog
         return AlertDialog(
           title: new Text(value),
-          content: new Text("Pretend this is the menu"),
+          content: FutureBuilder(
+              future: Firestore.instance.collection('messmenu').getDocuments(),
+              builder: (context, snapshot) {
+                if (snapshot.data != null)
+                  return Text(snapshot.data.documents[0].data['breakfast']);
+                return Text("Loading");
+              }),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
@@ -177,26 +188,25 @@ class _HomeState extends State<Home> {
   Widget card(String value) {
     return Container(
         child: Card(
-          elevation: 8.0,
-          margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-          child: Container(
-            child: ListTile(
-                contentPadding:
+      elevation: 8.0,
+      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      child: Container(
+        child: ListTile(
+            contentPadding:
                 EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                leading: Container(
-                  padding: EdgeInsets.only(right: 12.0),
-                  decoration: new BoxDecoration(
-                      border: new Border(
-                          right:
+            leading: Container(
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: new BoxDecoration(
+                  border: new Border(
+                      right:
                           new BorderSide(width: 1.0, color: Colors.white24))),
-                  child: Icon(Icons.fastfood, color: Colors.white),
-                ),
-                title: Text(value),
-                trailing: Icon(Icons.keyboard_arrow_right,
-                    color: Colors.white, size: 30.0),
-                onTap: () => _showMenu(value)),
-          ),
-        ));
+              child: Icon(Icons.fastfood, color: Colors.white),
+            ),
+            title: Text(value),
+            trailing: Icon(Icons.keyboard_arrow_right,
+                color: Colors.white, size: 30.0),
+            onTap: () => _showMenu(value)),
+      ),
+    ));
   }
-
 }
