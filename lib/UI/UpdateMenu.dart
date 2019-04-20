@@ -29,7 +29,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty)
-                      return "Enter today's breakfast";
+                      _messMenu.breakfast = "Not updated yet, keep checking for updates!";
                     else
                       _messMenu.breakfast = input;
                   },
@@ -44,7 +44,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty)
-                      return "Enter today's lunch";
+                      _messMenu.lunch = "Not updated yet, keep checking for updates!";
                     else
                       _messMenu.lunch = input;
                   },
@@ -59,7 +59,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty)
-                      return "Enter today's Hi-Tea";
+                      _messMenu.hitea = "Not updated yet, keep checking for updates!";
                     else
                       _messMenu.hitea = input;
                   },
@@ -74,7 +74,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty)
-                      return "Enter today's dinner";
+                      _messMenu.dinner = "Not updated yet, keep checking for updates!";
                     else
                       _messMenu.dinner = input;
                   },
@@ -97,7 +97,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                         onPressed: () async {
                           if (_formKey.currentState.validate())
-                            await _messMenu.publishDoc();
+                            await _messMenu.publishDoc().then((_)=>_showMessageAfterSubmit());
                         },
                         child: Text("Submit",
                             textAlign: TextAlign.center,
@@ -109,6 +109,27 @@ class _UpdateMenuState extends State<UpdateMenu> {
               ],
             )),
       ),
+    );
+  }
+
+  void _showMessageAfterSubmit() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          content: new Text("Menu updated!"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

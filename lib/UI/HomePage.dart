@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
     _githubTapRecognizer = new TapGestureRecognizer()
       ..onTap = () => _openUrl(githubUrl);
     askIfEmployee(user);
-    Future.delayed(Duration(seconds: 1), () => setState(() {}));
+    Future.delayed(Duration(seconds: 2), () => setState(() {}));
   }
 
   askIfEmployee(UserData user) {

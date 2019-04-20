@@ -86,7 +86,7 @@ class _feedbackState extends State<feedback> {
                 padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                 onPressed: () async {
                   if(_formKey.currentState.validate())
-                  await _comment.publishDoc();
+                  await _comment.publishDoc().then((_)=>_showMessageAfterSubmit());
                 },
                 child: Text("Submit",
                     textAlign: TextAlign.center,
@@ -98,5 +98,26 @@ class _feedbackState extends State<feedback> {
             ],
           )),
         ),);
+  }
+
+  void _showMessageAfterSubmit() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          content: new Text("Feedback submitted!"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
