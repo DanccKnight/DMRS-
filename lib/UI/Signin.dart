@@ -47,9 +47,9 @@ class _loginPageState extends State<loginPage> {
                   color: Colors.blue,
                   onPressed: () async {
                     if (await Auth.signInWithGoogle() == true)
-                      Navigator.of(context).pushReplacementNamed('/Home');
+                      Future.delayed(Duration(seconds: 1), ()=>Navigator.of(context).pushReplacementNamed('/Home'));
                   },
-                  child: new Text("Sign in with Google"),
+                  child: new Text("Sign up with Google"),
                 )),
           ],
         ),
