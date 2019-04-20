@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dmrs/Data/Singleton.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Comment.g.dart';
@@ -7,9 +8,10 @@ part 'Comment.g.dart';
 class Comment {
   Comment(
       {this.cid,
-      this.name,
       this.feedback,
       this.regNo,
+      this.uid,
+      this.name,
       this.documentSnapshot,
       bool nullObj = true}) {
     if (!nullObj) {
@@ -21,6 +23,7 @@ class Comment {
   }
 
   String cid;
+  String uid;
   String name;
   String feedback;
   String regNo;
@@ -40,17 +43,22 @@ class Comment {
   void loadFromDocumentSnapshot() {
     Comment comment = _$CommentFromJson(documentSnapshot.data);
     this.regNo = comment.regNo;
-    this.name = comment.name;
     this.feedback = comment.feedback;
+    this.uid = UserData().user.uid;
+    this.name = comment.name;
     this.documentSnapshot = comment.documentSnapshot;
   }
 
-  factory Comment.fromJson(Map<String,dynamic> json) => _$CommentFromJson(json);
+  factory Comment.fromJson(Map<String, dynamic> json) =>
+      _$CommentFromJson(json);
 
   Map<String, dynamic> toJson() => _$CommentToJson(this);
 
-  void _serverUpdate() {
+  Future<void> _serverUpdate() async {
     if (cid != null && cid != "")
-      Firestore.instance.collection('comments').document(cid).setData(toJson());
+      await Firestore.instance
+          .collection('comments')
+          .document(cid)
+          .setData(toJson());
   }
 }

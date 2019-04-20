@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dmrs/Data/Comment.dart';
 
 class feedback extends StatefulWidget {
   @override
@@ -7,7 +8,8 @@ class feedback extends StatefulWidget {
 
 class _feedbackState extends State<feedback> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String name, comment, regNo;
+
+  Comment _comment = Comment(nullObj: true);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,8 @@ class _feedbackState extends State<feedback> {
           TextFormField(
             validator: (input) {
               if (input.isEmpty) return "Enter your registration number";
+              else _comment.regNo = input;
             },
-            onSaved: (input) => regNo = input,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               labelText: 'Registration No',
@@ -41,8 +43,9 @@ class _feedbackState extends State<feedback> {
             validator: (input) {
               if (input.isEmpty)
                 return "Enter your name";
-            },
-            onSaved: (input) => name = input,
+              else
+                _comment.name = input;
+            } ,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               labelText: 'Name',
@@ -56,8 +59,9 @@ class _feedbackState extends State<feedback> {
             validator: (input) {
               if (input.isEmpty)
                 return "Enter your comments";
+              else
+                _comment.feedback = input;
             },
-            onSaved: (input) => comment = input,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               labelText: 'Comments',
@@ -80,7 +84,10 @@ class _feedbackState extends State<feedback> {
                     .size
                     .width,
                 padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                onPressed: () {},
+                onPressed: () async {
+                  if(_formKey.currentState.validate())
+                  await _comment.publishDoc();
+                },
                 child: Text("Submit",
                     textAlign: TextAlign.center,
                     style: TextStyle(
