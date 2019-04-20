@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
     _githubTapRecognizer = new TapGestureRecognizer()
       ..onTap = () => _openUrl(githubUrl);
     askIfEmployee(user);
-    Future.delayed(Duration(seconds: 1), ()=>setState((){}));
+    Future.delayed(Duration(seconds: 1), () => setState(() {}));
   }
 
   askIfEmployee(UserData user) {
@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
     return mainThing();
   }
 
-  Widget mainThing(){
+  Widget mainThing() {
     return Scaffold(
         appBar: AppBar(
           title: new Text("Today's Menu"),
@@ -65,11 +65,17 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName: Text(UserData().fireUser==null?"":UserData().fireUser.displayName),
-                accountEmail: Text(UserData().fireUser==null?"":UserData().fireUser.email),
+                accountName: Text(
+                    UserData().fireUser == null ? "" : UserData().fireUser
+                        .displayName),
+                accountEmail: Text(
+                    UserData().fireUser == null ? "" : UserData().fireUser
+                        .email),
                 currentAccountPicture: new GestureDetector(
                   child: new CircleAvatar(
-                    backgroundImage: new NetworkImage(UserData().fireUser==null?"":user.fireUser.photoUrl),
+                    backgroundImage: new NetworkImage(
+                        UserData().fireUser == null ? "" : user.fireUser
+                            .photoUrl),
                   ),
                 ),
                 decoration: BoxDecoration(color: Colors.blueAccent),
@@ -95,7 +101,7 @@ class _HomeState extends State<Home> {
               card(_d),
             ])),
         floatingActionButton: new FloatingActionButton(
-          onPressed: null,
+          onPressed: onPressedFAB,
           child: Icon(Icons.edit,
             color: Colors.black,
           ),
@@ -103,6 +109,13 @@ class _HomeState extends State<Home> {
         ));
   }
 
+  void onPressedFAB() {
+    if (user.user.isEmployee == true) {
+      Navigator.of(context).pushNamed('/updateMenu');
+    }
+    else
+      null;
+  }
 
   static const String githubUrl = 'https://github.com/DanccKnight/DMRS-';
 
@@ -116,15 +129,15 @@ class _HomeState extends State<Home> {
           content: new RichText(
               text: new TextSpan(
                   text:
-                      'This app has been made using Flutter and Cloud Firestore. Feel free to check out the code at: ',
+                  'This app has been made using Flutter and Cloud Firestore. Feel free to check out the code at: ',
                   children: <TextSpan>[
-                new TextSpan(
-                    text: 'https://github.com/DanccKnight/DMRS-',
-                    recognizer: _githubTapRecognizer,
-                    style: const TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline)),
-              ])),
+                    new TextSpan(
+                        text: 'https://github.com/DanccKnight/DMRS-',
+                        recognizer: _githubTapRecognizer,
+                        style: const TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline)),
+                  ])),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
