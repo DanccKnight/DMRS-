@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dmrs/Data/MessMenu.dart';
+import 'package:dmrs/UI/HomePage.dart';
 
 class UpdateMenu extends StatefulWidget {
   @override
@@ -96,8 +97,9 @@ class _UpdateMenuState extends State<UpdateMenu> {
                         minWidth: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                         onPressed: () async {
-                          if (_formKey.currentState.validate())
-                            await _messMenu.publishDoc().then((_)=>_showMessageAfterSubmit());
+                            if (_formKey.currentState.validate())
+                              await _messMenu.publishDoc().then((_) =>
+                                  _showMessageAfterSubmit());
                         },
                         child: Text("Submit",
                             textAlign: TextAlign.center,

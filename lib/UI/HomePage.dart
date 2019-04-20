@@ -162,19 +162,18 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (BuildContext context) {
         // return object of type Dialog
-        if(value == _b)
+        if (value == _b)
           return bdialog(value);
-        else if(value == _l)
+        else if (value == _l)
           return ldialog(value);
-        else if(value == _ht)
+        else if (value == _ht)
           return htdialog(value);
-        else if(value == _d)
-          return ddialog(value);
+        else if (value == _d) return ddialog(value);
       },
     );
   }
 
-  Widget bdialog(String value){
+  Widget bdialog(String value) {
     return AlertDialog(
       title: new Text(value),
       content: FutureBuilder(
@@ -196,7 +195,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget ldialog(String value){
+  Widget ldialog(String value) {
     return AlertDialog(
       title: new Text(value),
       content: FutureBuilder(
@@ -218,7 +217,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget htdialog(String value){
+  Widget htdialog(String value) {
     return AlertDialog(
       title: new Text(value),
       content: FutureBuilder(
@@ -240,7 +239,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget ddialog(String value){
+  Widget ddialog(String value) {
     return AlertDialog(
       title: new Text(value),
       content: FutureBuilder(
