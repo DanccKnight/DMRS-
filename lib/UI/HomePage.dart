@@ -162,26 +162,103 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (BuildContext context) {
         // return object of type Dialog
-        return AlertDialog(
-          title: new Text(value),
-          content: FutureBuilder(
-              future: Firestore.instance.collection('messmenu').getDocuments(),
-              builder: (context, snapshot) {
-                if (snapshot.data != null)
-                  return Text(snapshot.data.documents[0].data['breakfast']);
-                return Text("Loading");
-              }),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+        if(value == _b)
+          return bdialog(value);
+        else if(value == _l)
+          return ldialog(value);
+        else if(value == _ht)
+          return htdialog(value);
+        else if(value == _d)
+          return ddialog(value);
       },
+    );
+  }
+
+  Widget bdialog(String value){
+    return AlertDialog(
+      title: new Text(value),
+      content: FutureBuilder(
+          future: Firestore.instance.collection('messmenu').getDocuments(),
+          builder: (context, snapshot) {
+            if (snapshot.data != null)
+              return Text(snapshot.data.documents[0].data['breakfast']);
+            return Text("Loading");
+          }),
+      actions: <Widget>[
+        // usually buttons at the bottom of the dialog
+        new FlatButton(
+          child: new Text("Close"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget ldialog(String value){
+    return AlertDialog(
+      title: new Text(value),
+      content: FutureBuilder(
+          future: Firestore.instance.collection('messmenu').getDocuments(),
+          builder: (context, snapshot) {
+            if (snapshot.data != null)
+              return Text(snapshot.data.documents[0].data['lunch']);
+            return Text("Loading");
+          }),
+      actions: <Widget>[
+        // usually buttons at the bottom of the dialog
+        new FlatButton(
+          child: new Text("Close"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget htdialog(String value){
+    return AlertDialog(
+      title: new Text(value),
+      content: FutureBuilder(
+          future: Firestore.instance.collection('messmenu').getDocuments(),
+          builder: (context, snapshot) {
+            if (snapshot.data != null)
+              return Text(snapshot.data.documents[0].data['hitea']);
+            return Text("Loading");
+          }),
+      actions: <Widget>[
+        // usually buttons at the bottom of the dialog
+        new FlatButton(
+          child: new Text("Close"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget ddialog(String value){
+    return AlertDialog(
+      title: new Text(value),
+      content: FutureBuilder(
+          future: Firestore.instance.collection('messmenu').getDocuments(),
+          builder: (context, snapshot) {
+            if (snapshot.data != null)
+              return Text(snapshot.data.documents[0].data['dinner']);
+            return Text("Loading");
+          }),
+      actions: <Widget>[
+        // usually buttons at the bottom of the dialog
+        new FlatButton(
+          child: new Text("Close"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
     );
   }
 
