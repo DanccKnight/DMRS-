@@ -18,7 +18,7 @@ class _loginPageState extends State<loginPage> {
         key: _formKey,
         child: Stack(
           children: <Widget>[
-            Container(
+            /*Container(
               padding: EdgeInsets.fromLTRB(18.0, 120.0, 0.0, 0.0),
               child: new Text(
                 'Hello',
@@ -37,17 +37,32 @@ class _loginPageState extends State<loginPage> {
                     fontWeight: FontWeight.bold,
                     fontSize: 80.0),
               ),
+            ),*/
+            Container(
+              padding: EdgeInsets.fromLTRB(107.0, 150.0, 0.0, 0.0),
+              child: FlutterLogo(size: 150.0),
             ),
             Container(
-                padding: EdgeInsets.fromLTRB(180.0, 459.0, 0.0, 0.0),
-                child: RaisedButton(
-                  textColor: Colors.white,
+                padding: EdgeInsets.fromLTRB(20.0, 468.0, 20.0, 0.0),
+                child: Material(
+                  elevation: 5.0,
+                  borderRadius: BorderRadius.circular(30.0),
                   color: Colors.blue,
-                  onPressed: () async {
-                    if (await Auth.signInWithGoogle() == true)
-                      Future.delayed(Duration(seconds: 1), ()=>Navigator.of(context).pushReplacementNamed('/Home'));
-                  },
-                  child: new Text("Sign up with Google"),
+                  child: MaterialButton(
+                    minWidth: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                    onPressed: () async {
+                      if (await Auth.signInWithGoogle() == true)
+                        Future.delayed(
+                            Duration(seconds: 1),
+                                () => Navigator.of(context)
+                                .pushReplacementNamed('/Home'));
+                    },
+                    child: Text("Login with Google",
+                        textAlign: TextAlign.center,
+                        style: TextStyle().copyWith(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                  ),
                 )),
           ],
         ),
