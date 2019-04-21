@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dmrs/Data/Comment.dart';
+import 'package:dmrs/Data/Singleton.dart';
 
 class feedback extends StatefulWidget {
   @override
@@ -9,8 +10,8 @@ class feedback extends StatefulWidget {
 class _feedbackState extends State<feedback> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Comment _comment = Comment(nullObj: true);
-
+  Comment comment = Comment(nullObj: true);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,7 @@ class _feedbackState extends State<feedback> {
           TextFormField(
             validator: (input) {
               if (input.isEmpty) return "Enter your registration number";
-              else _comment.regNo = input;
+              else comment.regNo = input;
             },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -44,7 +45,7 @@ class _feedbackState extends State<feedback> {
               if (input.isEmpty)
                 return "Enter your name";
               else
-                _comment.name = input;
+                comment.name = input;
             } ,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -60,7 +61,7 @@ class _feedbackState extends State<feedback> {
               if (input.isEmpty)
                 return "Enter your comments";
               else
-                _comment.feedback = input;
+                comment.feedback = input;
             },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -85,8 +86,9 @@ class _feedbackState extends State<feedback> {
                     .width,
                 padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                 onPressed: () async {
+                  comment.uid = UserData().user.uid;
                   if(_formKey.currentState.validate())
-                  await _comment.publishDoc().then((_)=>_showMessageAfterSubmit());
+                  await comment.publishDoc().then((_)=>_showMessageAfterSubmit());
                 },
                 child: Text("Submit",
                     textAlign: TextAlign.center,

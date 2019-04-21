@@ -11,14 +11,14 @@ Comment _$CommentFromJson(Map<String, dynamic> json) {
       cid: json['cid'] as String,
       feedback: json['feedback'] as String,
       regNo: json['regNo'] as String,
-      uid: json['uid'] as String,
-      name: json['name'] as String);
+      name: json['name'] as String,
+      uid: json['uid'] as String);
 }
 
 Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
       'cid': instance.cid,
-      'uid': instance.uid,
       'name': instance.name,
+      'uid': instance.uid,
       'feedback': instance.feedback,
       'regNo': instance.regNo
     };

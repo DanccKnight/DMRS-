@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dmrs/Data/Singleton.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'Comment.g.dart';
@@ -10,8 +9,8 @@ class Comment {
       {this.cid,
       this.feedback,
       this.regNo,
-      this.uid,
       this.name,
+      this.uid,
       this.documentSnapshot,
       bool nullObj = true}) {
     if (!nullObj) {
@@ -23,8 +22,8 @@ class Comment {
   }
 
   String cid;
-  String uid;
   String name;
+  String uid;
   String feedback;
   String regNo;
 
@@ -44,7 +43,7 @@ class Comment {
     Comment comment = _$CommentFromJson(documentSnapshot.data);
     this.regNo = comment.regNo;
     this.feedback = comment.feedback;
-    this.uid = UserData().user.uid;
+    this.uid = comment.uid;
     this.name = comment.name;
     this.documentSnapshot = comment.documentSnapshot;
   }
