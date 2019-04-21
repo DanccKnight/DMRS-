@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dmrs/Data/Singleton.dart';
 import 'package:dmrs/Data/MessMenu.dart';
+import 'package:dmrs/Data/User.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,7 +15,6 @@ class _HomeState extends State<Home> {
   TapGestureRecognizer _githubTapRecognizer;
 
   UserData user = UserData();
-  bool _ask;
   final String _b = "Breakfast";
   final String _l = "Lunch";
   final String _ht = "Hi-Tea";
@@ -25,13 +25,13 @@ class _HomeState extends State<Home> {
     super.initState();
     _githubTapRecognizer = new TapGestureRecognizer()
       ..onTap = () => _openUrl(githubUrl);
-    askIfEmployee(user);
+    askIfEmployee();
     Future.delayed(Duration(seconds: 2), () => setState(() {}));
   }
 
-  askIfEmployee(UserData user) {
-    if (user.user.isEmployee == null) {
-      _ask = true;
+  askIfEmployee() {
+    if (UserData().user.isEmployee == null) {
+      displayMessage();
     }
   }
 
@@ -156,6 +156,26 @@ class _HomeState extends State<Home> {
   }
 
   MessMenu messMenu = MessMenu();
+
+  void displayMessage() {
+    showDialog(context: context, builder: (BuildContext context) {
+      return AlertDialog(
+        content: Text("Are you a student or an employee?",style: TextStyle(
+          fontSize: 20.0
+        )),
+        actions: <Widget>[
+          FlatButton(onPressed: (){
+            UserData().user.isEmployee = true;
+            UserData().user.serverUpdate();
+          }, child: Text("Employee")),
+          FlatButton(onPressed: (){
+            UserData().user.isEmployee = false;
+            UserData().user.serverUpdate();
+          }, child: Text("Student"))
+        ],
+      );
+    });
+  }
 
   void _showMenu(String value) {
     showDialog(

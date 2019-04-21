@@ -29,14 +29,14 @@ class User {
       email = result.documents.elementAt(0)['email'];
       profileImage = result.documents.elementAt(0)['photoUrl'];
       isEmployee = result.documents.elementAt(0)['isEmployee'];
-      _serverUpdate();
+      serverUpdate();
       initialized = true;
     });
   }
 
   void setEmployee(bool isEmployee) {
     this.isEmployee = isEmployee;
-    _serverUpdate();
+    serverUpdate();
   }
 
   Map<String, dynamic> toJson() => {
@@ -47,7 +47,7 @@ class User {
     'isEmployee': isEmployee
   };
 
-  void _serverUpdate() {
+  void serverUpdate() {
     if (uid != null && uid != "")
       Firestore.instance.collection('users').document(uid).setData(toJson());
   }
