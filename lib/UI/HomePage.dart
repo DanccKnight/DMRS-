@@ -56,13 +56,25 @@ class _HomeState extends State<Home> {
     return mainThing();
   }
 
+  void showSheet(){
+    showModalBottomSheet(context: context, builder: (BuildContext bc) {
+      return Container(
+        padding: EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 10.0),
+        child: Text("Sorry, this function exists only for Employees."),
+      );
+    });
+  }
+
   Widget mainThing() {
     return Scaffold(
         appBar: AppBar(
           title: new Text("Today's Menu"),
           actions: <Widget>[
             IconButton(icon: Icon(Icons.list), onPressed: (){
-              Navigator.of(context).pushNamed('/CommentList');
+              if(UserData().user.isEmployee == true)
+                Navigator.of(context).pushNamed('/CommentList');
+              else
+                showSheet();
             })
           ],
         ),
@@ -122,12 +134,7 @@ class _HomeState extends State<Home> {
     if (user.user.isEmployee == true) {
       Navigator.of(context).pushNamed('/updateMenu');
     } else {
-        showModalBottomSheet(context: context, builder: (BuildContext bc) {
-          return Container(
-            padding: EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 10.0),
-            child: Text("Sorry, this function exists only for Employees."),
-          );
-        });
+        showSheet();
       }
   }
 

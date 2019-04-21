@@ -22,7 +22,6 @@ class _CommentsPageState extends State<CommentsPage> {
             itemBuilder: (BuildContext context, int index) {
               final DocumentSnapshot _card = snapshot.data.documents[index];
               return ListTile(
-                leading: CircleAvatar(backgroundImage: new NetworkImage(UserData().fireUser.photoUrl)),
                 title: Text(_card['name']),
                 subtitle: Text(_card['feedback']),
               );
