@@ -43,6 +43,12 @@ class _loginPageState extends State<loginPage> {
               child: FlutterLogo(size: 150.0),
             ),
             Container(
+              padding: EdgeInsets.fromLTRB(95.0, 389.0, 0.0, 0.0),
+              child: Text("The Mess Rating System",
+                style: TextStyle(fontSize: 22),
+              ),
+            ),
+            Container(
                 padding: EdgeInsets.fromLTRB(20.0, 468.0, 20.0, 0.0),
                 child: Material(
                   elevation: 5.0,

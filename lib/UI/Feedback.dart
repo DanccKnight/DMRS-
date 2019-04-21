@@ -78,7 +78,7 @@ class _feedbackState extends State<feedback> {
             Material(
               elevation: 5.0,
               borderRadius: BorderRadius.circular(30.0),
-              color: Color(0xff01A0C7),
+              color: Colors.blue,
               child: MaterialButton(
                 minWidth: MediaQuery
                     .of(context)

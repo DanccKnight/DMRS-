@@ -57,13 +57,15 @@ class _HomeState extends State<Home> {
     return mainThing();
   }
 
-  void showSheet(){
-    showModalBottomSheet(context: context, builder: (BuildContext bc) {
-      return Container(
-        padding: EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 10.0),
-        child: Text("Sorry, this function exists only for Employees."),
-      );
-    });
+  void showSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            padding: EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 10.0),
+            child: Text("Sorry, this function exists only for Employees."),
+          );
+        });
   }
 
   Widget mainThing() {
@@ -71,17 +73,21 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: new Text("Today's Menu"),
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.list), onPressed: (){
-              if(UserData().user.isEmployee == true)
-                Navigator.of(context).pushNamed('/CommentList');
-              else
-                showSheet();
-            }),
-            IconButton(icon: Icon(Icons.exit_to_app), onPressed: (){
-              Auth().logoutUser().then((_){
-                Navigator.of(context).pushReplacementNamed('/Login');
-              });
-            })
+            IconButton(
+                icon: Icon(Icons.list),
+                onPressed: () {
+                  if (UserData().user.isEmployee == true)
+                    Navigator.of(context).pushNamed('/CommentList');
+                  else
+                    showSheet();
+                }),
+            IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () {
+                  Auth().logoutUser().then((_) {
+                    Navigator.of(context).pushReplacementNamed('/Login');
+                  });
+                })
           ],
         ),
         drawer: Drawer(
@@ -103,7 +109,7 @@ class _HomeState extends State<Home> {
                             : user.fireUser.photoUrl),
                   ),
                 ),
-                decoration: BoxDecoration(color: Colors.blueAccent),
+                decoration: BoxDecoration(color: Colors.blue),
               ),
               ListTile(
                 title: Text('Feedback'),
@@ -129,9 +135,9 @@ class _HomeState extends State<Home> {
           onPressed: onPressedFAB,
           child: Icon(
             Icons.edit,
-            color: Colors.black,
+            color: Colors.black87,
           ),
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.blue,
         ));
   }
 
@@ -140,8 +146,8 @@ class _HomeState extends State<Home> {
     if (user.user.isEmployee == true) {
       Navigator.of(context).pushNamed('/updateMenu');
     } else {
-        showSheet();
-      }
+      showSheet();
+    }
   }
 
   static const String githubUrl = 'https://github.com/DanccKnight/DMRS-';
@@ -157,6 +163,7 @@ class _HomeState extends State<Home> {
               text: new TextSpan(
                   text:
                       'This app has been made using Flutter and Cloud Firestore. Feel free to check out the code at: ',
+                  style: TextStyle(color: Colors.black),
                   children: <TextSpan>[
                 new TextSpan(
                     text: 'https://github.com/DanccKnight/DMRS-',
@@ -187,7 +194,7 @@ class _HomeState extends State<Home> {
         builder: (BuildContext context) {
           return AlertDialog(
             content: Text("Are you a student or an employee?",
-                style: TextStyle(fontSize: 20.0)),
+                style: TextStyle(fontSize: 20.0, color: Colors.black87)),
             actions: <Widget>[
               FlatButton(
                   onPressed: () {
@@ -195,14 +202,18 @@ class _HomeState extends State<Home> {
                     UserData().user.setEmployee(UserData().user.isEmployee);
                     Navigator.of(context).pop();
                   },
-                  child: Text("Employee")),
+                  child: Text(
+                    "Employee",
+                  )),
               FlatButton(
                   onPressed: () {
                     UserData().user.isEmployee = false;
                     UserData().user.setEmployee(UserData().user.isEmployee);
                     Navigator.of(context).pop();
                   },
-                  child: Text("Student"))
+                  child: Text(
+                    "Student",
+                  ))
             ],
           );
         });
@@ -325,13 +336,12 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.only(right: 12.0),
               decoration: new BoxDecoration(
                   border: new Border(
-                      right:
-                          new BorderSide(width: 1.0, color: Colors.white24))),
-              child: Icon(Icons.fastfood, color: Colors.white),
+                      right: new BorderSide(width: 1.0, color: Colors.black))),
+              child: Icon(Icons.fastfood, color: Colors.black),
             ),
             title: Text(value),
             trailing: Icon(Icons.keyboard_arrow_right,
-                color: Colors.white, size: 30.0),
+                color: Colors.black, size: 30.0),
             onTap: () => _showMenu(value)),
       ),
     ));

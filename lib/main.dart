@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: "Mess Rating Thingy",
-      theme: ThemeData.dark(),
       home: new loginPage(),
       routes: <String,WidgetBuilder>{
         '/Login': (BuildContext context) => new loginPage(),
