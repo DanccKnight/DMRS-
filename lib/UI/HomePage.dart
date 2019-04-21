@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
     super.initState();
     _githubTapRecognizer = new TapGestureRecognizer()
       ..onTap = () => _openUrl(githubUrl);
-    askIfEmployee();
+    Future.delayed(Duration.zero, ()=>askIfEmployee());
     Future.delayed(Duration(seconds: 2), () => setState(() {}));
   }
 
@@ -167,10 +167,12 @@ class _HomeState extends State<Home> {
           FlatButton(onPressed: (){
             UserData().user.isEmployee = true;
             UserData().user.serverUpdate();
+            Navigator.of(context).pop();
           }, child: Text("Employee")),
           FlatButton(onPressed: (){
             UserData().user.isEmployee = false;
             UserData().user.serverUpdate();
+            Navigator.of(context).pop();
           }, child: Text("Student"))
         ],
       );
