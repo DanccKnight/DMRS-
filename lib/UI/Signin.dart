@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dmrs/Data/auth.dart';
 
 class loginPage extends StatefulWidget {
@@ -8,7 +7,6 @@ class loginPage extends StatefulWidget {
 }
 
 class _loginPageState extends State<loginPage> {
-  String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final snackbar = SnackBar(content: new Text("Google Sign In Failed"));

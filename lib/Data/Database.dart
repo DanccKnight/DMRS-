@@ -14,7 +14,8 @@ Future<void> updateUserDB() async {
       name: UserData().fireUser.displayName,
       profileImage: UserData().fireUser.photoUrl,
       email: UserData().fireUser.email,
-      isEmployee: documents.length !=0 ? documents[0].data['isEmployee']:null,
+      isEmployee:
+          documents.length != 0 ? documents[0].data['isEmployee'] : null,
     );
     UserData().user = currentUser;
     if (documents.length == 0) {
@@ -32,4 +33,3 @@ Future<void> updateUserDB() async {
     }
   }
 }
-

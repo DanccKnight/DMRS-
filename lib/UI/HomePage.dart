@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dmrs/Data/Singleton.dart';
 import 'package:dmrs/Data/MessMenu.dart';
+import 'package:dmrs/Data/auth.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -75,6 +76,11 @@ class _HomeState extends State<Home> {
                 Navigator.of(context).pushNamed('/CommentList');
               else
                 showSheet();
+            }),
+            IconButton(icon: Icon(Icons.exit_to_app), onPressed: (){
+              Auth().logoutUser().then((_){
+                Navigator.of(context).pushReplacementNamed('/Login');
+              });
             })
           ],
         ),

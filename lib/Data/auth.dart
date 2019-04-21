@@ -27,4 +27,10 @@ class Auth {
     }
     return true;
   }
+
+  Future<void> logoutUser() async {
+    await _auth.signOut();
+    await _googleSignIn.signOut();
+  }
+
 }

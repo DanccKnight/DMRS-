@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       home: new loginPage(),
       routes: <String,WidgetBuilder>{
+        '/Login': (BuildContext context) => new loginPage(),
         '/Home': (BuildContext context) => new Home(),
         '/Feedback': (BuildContext context) => new feedback(),
         '/updateMenu': (BuildContext context) => new UpdateMenu(),
