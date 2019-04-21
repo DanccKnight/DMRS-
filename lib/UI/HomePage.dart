@@ -60,6 +60,11 @@ class _HomeState extends State<Home> {
     return Scaffold(
         appBar: AppBar(
           title: new Text("Today's Menu"),
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.list), onPressed: (){
+              Navigator.of(context).pushNamed('/CommentList');
+            })
+          ],
         ),
         drawer: Drawer(
           child: ListView(

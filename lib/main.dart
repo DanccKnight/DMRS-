@@ -3,7 +3,7 @@ import 'package:dmrs/UI/Signin.dart';
 import 'package:dmrs/UI/HomePage.dart';
 import 'package:dmrs/UI/Feedback.dart';
 import 'package:dmrs/UI/UpdateMenu.dart';
-
+import 'package:dmrs/UI/CommentsPage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       routes: <String,WidgetBuilder>{
         '/Home': (BuildContext context) => new Home(),
         '/Feedback': (BuildContext context) => new feedback(),
-        '/updateMenu': (BuildContext context) => new UpdateMenu()
+        '/updateMenu': (BuildContext context) => new UpdateMenu(),
+        '/CommentList': (BuildContext context) => new CommentsPage()
       }
     );
   }
