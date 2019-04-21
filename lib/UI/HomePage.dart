@@ -68,6 +68,17 @@ class _HomeState extends State<Home> {
         });
   }
 
+  void showEmployeeSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            padding: EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 10.0),
+            child: Text("Sorry, this function exists only for the students."),
+          );
+        });
+  }
+
   Widget mainThing() {
     return Scaffold(
         appBar: AppBar(
@@ -114,7 +125,10 @@ class _HomeState extends State<Home> {
               ListTile(
                 title: Text('Feedback'),
                 onTap: () {
-                  Navigator.of(context).pushNamed('/Feedback');
+                  if(UserData().user.isEmployee==false)
+                    Navigator.of(context).pushNamed('/Feedback');
+                  else
+                    showEmployeeSheet();
                 },
               ),
               ListTile(
