@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dmrs/Data/Singleton.dart';
 import 'package:dmrs/Data/MessMenu.dart';
-import 'package:dmrs/Data/User.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -25,7 +24,8 @@ class _HomeState extends State<Home> {
     super.initState();
     _githubTapRecognizer = new TapGestureRecognizer()
       ..onTap = () => _openUrl(githubUrl);
-    Future.delayed(Duration(seconds: 2), () => setState(() {}));
+    Future.delayed(Duration(seconds: 3), () => askIfEmployee());
+    Future.delayed(Duration(seconds: 1), () => setState(() {}));
   }
 
   askIfEmployee() {
@@ -113,11 +113,17 @@ class _HomeState extends State<Home> {
   }
 
   void onPressedFAB() {
-    askIfEmployee();
+    //askIfEmployee();
     if (user.user.isEmployee == true) {
       Navigator.of(context).pushNamed('/updateMenu');
-    } else
-      null;
+    } else {
+        showModalBottomSheet(context: context, builder: (BuildContext bc) {
+          return Container(
+            padding: EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 10.0),
+            child: Text("Sorry, this function exists only for Employees."),
+          );
+        });
+      }
   }
 
   static const String githubUrl = 'https://github.com/DanccKnight/DMRS-';
