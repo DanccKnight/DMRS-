@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+
 class User {
   User(
       {@required this.uid,
@@ -29,14 +30,14 @@ class User {
       email = result.documents.elementAt(0)['email'];
       profileImage = result.documents.elementAt(0)['photoUrl'];
       isEmployee = result.documents.elementAt(0)['isEmployee'];
-      serverUpdate();
+      _serverUpdate();
       initialized = true;
     });
   }
 
   void setEmployee(bool isEmployee) {
     this.isEmployee = isEmployee;
-    serverUpdate();
+    _serverUpdate();
   }
 
   Map<String, dynamic> toJson() => {
@@ -47,7 +48,8 @@ class User {
     'isEmployee': isEmployee
   };
 
-  void serverUpdate() {
+  void _serverUpdate() {
+    print(uid + this.isEmployee.toString());
     if (uid != null && uid != "")
       Firestore.instance.collection('users').document(uid).setData(toJson());
   }

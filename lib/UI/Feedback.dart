@@ -11,7 +11,7 @@ class _feedbackState extends State<feedback> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Comment comment = Comment(nullObj: true);
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -25,7 +25,6 @@ class _HomeState extends State<Home> {
     super.initState();
     _githubTapRecognizer = new TapGestureRecognizer()
       ..onTap = () => _openUrl(githubUrl);
-    Future.delayed(Duration.zero, ()=>askIfEmployee());
     Future.delayed(Duration(seconds: 2), () => setState(() {}));
   }
 
@@ -114,6 +113,7 @@ class _HomeState extends State<Home> {
   }
 
   void onPressedFAB() {
+    askIfEmployee();
     if (user.user.isEmployee == true) {
       Navigator.of(context).pushNamed('/updateMenu');
     } else
@@ -158,25 +158,30 @@ class _HomeState extends State<Home> {
   MessMenu messMenu = MessMenu();
 
   void displayMessage() {
-    showDialog(context: context, builder: (BuildContext context) {
-      return AlertDialog(
-        content: Text("Are you a student or an employee?",style: TextStyle(
-          fontSize: 20.0
-        )),
-        actions: <Widget>[
-          FlatButton(onPressed: (){
-            UserData().user.isEmployee = true;
-            UserData().user.serverUpdate();
-            Navigator.of(context).pop();
-          }, child: Text("Employee")),
-          FlatButton(onPressed: (){
-            UserData().user.isEmployee = false;
-            UserData().user.serverUpdate();
-            Navigator.of(context).pop();
-          }, child: Text("Student"))
-        ],
-      );
-    });
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text("Are you a student or an employee?",
+                style: TextStyle(fontSize: 20.0)),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    UserData().user.isEmployee = true;
+                    UserData().user.setEmployee(UserData().user.isEmployee);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Employee")),
+              FlatButton(
+                  onPressed: () {
+                    UserData().user.isEmployee = false;
+                    UserData().user.setEmployee(UserData().user.isEmployee);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Student"))
+            ],
+          );
+        });
   }
 
   void _showMenu(String value) {
