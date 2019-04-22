@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
     super.initState();
     _githubTapRecognizer = new TapGestureRecognizer()
       ..onTap = () => _openUrl(githubUrl);
-    Future.delayed(Duration(seconds: 3), () => askIfEmployee());
+    Future.delayed(Duration(seconds: 1), () => askIfEmployee());
     Future.delayed(Duration(seconds: 1), () => setState(() {}));
   }
 
@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
 
     if (await canLaunch(url)) {
       await launch(url);
-    } else {
+    } else {_messMenu.dinner = "Not updated yet, keep checking for updates!";
       throw 'Could not launch $url';
     }
   }

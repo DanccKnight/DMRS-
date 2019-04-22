@@ -29,7 +29,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty)
-                      _messMenu.breakfast = "Not updated yet, keep checking for updates!";
+                      return "Please enter breakfast details";
                     else
                       _messMenu.breakfast = input;
                   },
@@ -44,7 +44,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty)
-                      _messMenu.lunch = "Not updated yet, keep checking for updates!";
+                      return "Please enter lunch details";
                     else
                       _messMenu.lunch = input;
                   },
@@ -59,7 +59,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty)
-                      _messMenu.hitea = "Not updated yet, keep checking for updates!";
+                      return "Please enter Hi-Tea details";
                     else
                       _messMenu.hitea = input;
                   },
@@ -74,7 +74,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty)
-                      _messMenu.dinner = "Not updated yet, keep checking for updates!";
+                      return "Please enter Dinner details";
                     else
                       _messMenu.dinner = input;
                   },
