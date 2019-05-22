@@ -52,6 +52,8 @@ class _HomeState extends State<Home> {
     }
   }
 
+  MessMenu _messMenu;
+
   @override
   Widget build(BuildContext context) {
     return mainThing();
